@@ -1,4 +1,6 @@
-﻿namespace CorsoLibrary;
+﻿using System.Text;
+
+namespace CorsoLibrary;
 
 public class Corso
 { 
@@ -20,7 +22,10 @@ public class Corso
 
     public void AggiungiLezione(Lezione lezione)
     {
-        lezione.StudentiPresenti = Studenti;
+        foreach (var studente in Studenti)
+        {
+            lezione.StudentiPresenti.Add(new Studente(studente.Nome, studente.Cognome, studente.Matricola));
+        }
         Lezioni.Add(lezione);
     }
 
@@ -43,6 +48,39 @@ public class Corso
         {
             throw new Exception("Lo studente è gia nella lista degli studenti");
         }
-        Studenti.Add(new Studente(nome, cognome, matricola));
+        var studenteDaAggiungere = new Studente(nome, cognome, matricola);
+
+        foreach (var lezione in Lezioni)
+        {
+            lezione.StudentiPresenti.Add(studenteDaAggiungere);
+        }
+        Studenti.Add(studenteDaAggiungere);
+    }
+
+    public string ElencaLezioniCorso()
+    {
+        if (Lezioni.Count == 0)
+        {
+            return String.Empty;
+        }
+
+        StringBuilder elencoLezioni = new StringBuilder();
+        for (int i = 0; i < Lezioni.Count; i++)
+        {
+            elencoLezioni.Append($"{i + 1}|{Lezioni[i]}");
+        }
+
+        return elencoLezioni.ToString();
+    }
+
+    public float MediaStudentiPresenti()
+    {
+        float somma = 0;
+        foreach (var lezione in Lezioni)
+        {
+            somma += lezione.StudentiPresenti.Count;
+        }
+
+        return somma / Studenti.Count;
     }
 }

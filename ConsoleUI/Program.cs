@@ -50,10 +50,7 @@ while (scelta != 0)
             while (indiceCorso != 0)
             {
                 if (sceltaCorso == 0)
-                {
-                    sceltaCorso = -1;
                     break;
-                }
 
                 Console.WriteLine("Inserisci il numero del corso da selezionare");
                 if (!int.TryParse(Console.ReadLine(), out indiceCorso))
@@ -67,7 +64,7 @@ while (scelta != 0)
                 }
                 else
                 {
-                    indiceCorso = indiceCorso - 1;
+                    indiceCorso--;
                     Console.WriteLine("Hai selezionato il corso n°{0}", indiceCorso+1);
                     while (sceltaCorso != 0)
                     {
@@ -77,6 +74,7 @@ while (scelta != 0)
                         Console.WriteLine("3|Seleziona una lezione");
                         Console.WriteLine("4|Aggiungi uno studente al corso");
                         Console.WriteLine("5|Elenca gli studenti del corso");
+                        Console.WriteLine("6|Stampa la media degli studenti presenti del corso");
                         Console.WriteLine("0|Ritorna al Menù Principale");
 
                         if (!int.TryParse(Console.ReadLine(), out sceltaCorso))
@@ -132,9 +130,10 @@ while (scelta != 0)
 
                                 var docenteAssegnato = new Docente(nomeDocente, cognomeDocente, titoloStudioDocente);
                                 var aulaAssegnata = new Aula(capienzaAula, nomeAula);
-                                corsi[indiceCorso].AggiungiLezione(new Lezione
-                                    (descrizione, dataCorso, oraInizioCorso, durataCorso, 
-                                        docenteAssegnato, aulaAssegnata, corsi[indiceCorso].Studenti));
+                                var lezioneDaAggungere = new Lezione
+                                (descrizione, dataCorso, oraInizioCorso, durataCorso, docenteAssegnato, aulaAssegnata);
+
+                                corsi[indiceCorso].AggiungiLezione(lezioneDaAggungere);
 
                                 Console.WriteLine("La lezione è stata aggiunta");
                                 break;
@@ -144,10 +143,7 @@ while (scelta != 0)
                                     Console.WriteLine("Non ci sono lezioni da elencare");
                                     break;
                                 }
-                                foreach (var lezione in corsi[indiceCorso].Lezioni)
-                                {
-                                    Console.WriteLine(lezione);
-                                }
+                                Console.WriteLine(corsi[indiceCorso].ElencaLezioniCorso());
                                 break;
                             case 3:
                                 if (corsi[indiceCorso].Lezioni.Count == 0)
@@ -155,23 +151,13 @@ while (scelta != 0)
                                     Console.WriteLine("Non ci sono lezioni da selezionare");
                                     break;
                                 }
-
-                                for (int i = 0; i < corsi[indiceCorso].Lezioni.Count; i++)
-                                {
-                                    Console.WriteLine($"{i + 1}|{corsi[indiceCorso].Lezioni[i]}");
-                                }
+                                Console.WriteLine(corsi[indiceCorso].ElencaLezioniCorso());
 
                                 int indiceLezione = -1;
                                 int sceltaLezione = -1;
 
                                 while (indiceLezione != 0)
                                 {
-                                    //if (sceltaLezione == 0)
-                                    //{
-                                    //    sceltaLezione = -1;
-                                    //    break;
-                                    //}
-
                                     Console.WriteLine("Inserisci il numero della lezione da selezionare");
                                     if (!int.TryParse(Console.ReadLine(), out indiceLezione))
                                     {
@@ -184,18 +170,69 @@ while (scelta != 0)
                                     }
                                     else
                                     {
-                                        indiceLezione = indiceLezione - 1;
+                                        indiceLezione--;
                                         Console.WriteLine("Hai selezionato la lezione n°{0}", indiceLezione + 1);
                                         while (sceltaLezione != 0)
                                         {
                                             Console.WriteLine
-                                                ($"Menù Principale --> {corsi[indiceCorso]} --> {corsi[indiceCorso].Lezioni[indiceLezione]}");
-                                            Console.WriteLine("TODO:DA FINIRE");
+                                                ($"Menù Principale --> {corsi[indiceCorso]} --> {corsi[indiceCorso].Lezioni[indiceLezione].Descrizione}");
+                                            Console.WriteLine("1|Scheda riassuntiva della lezione");
+                                            Console.WriteLine("2|Elenca i presenti ad una lezione");
+                                            Console.WriteLine("3|Segna uno studente assente");
+                                            Console.WriteLine("4|Stampa la media dei presenti alla lezione");
+                                            Console.WriteLine("0|Torna al Menù Corso");
+
+                                            if (!int.TryParse(Console.ReadLine(), out sceltaLezione))
+                                            {
+                                                scelta = -1;
+                                            }
+
+                                            switch (sceltaLezione)
+                                            {
+                                                case 1:
+                                                    Console.WriteLine("Scheda Riassuntiva Lezione:");
+                                                    Console.WriteLine("Dati base:");
+                                                    Console.WriteLine(corsi[indiceCorso].Lezioni[indiceLezione]);
+                                                    Console.WriteLine("Studenti presenti:");
+                                                    Console.WriteLine(corsi[indiceCorso].Lezioni[indiceLezione].ElencaStudentiPresenti());
+                                                    break;
+                                                case 2:
+                                                    Console.WriteLine("Elenco Studenti Presenti:");
+                                                    Console.WriteLine(corsi[indiceCorso].Lezioni[indiceLezione].ElencaStudentiPresenti());
+                                                    break;
+                                                case 3:
+                                                    Console.WriteLine(corsi[indiceCorso].Lezioni[indiceLezione].ElencaStudentiPresenti());
+                                                    Console.WriteLine("Inserisci la matricola dello studente da segnare assente");
+
+                                                    if (!int.TryParse(Console.ReadLine(), out int inputMatricola))
+                                                    {
+                                                        Console.WriteLine("L'input inserito non è un numero");
+                                                    }
+                                                    else if (!corsi[indiceCorso].Lezioni[indiceLezione].SegnaStudenteAssente(inputMatricola))
+                                                    {
+                                                        Console.WriteLine("Nessuno studente ha quella matricola");
+                                                    }
+                                                    else
+                                                    {
+                                                        corsi[indiceCorso].Lezioni[indiceLezione].SegnaStudenteAssente(inputMatricola);
+                                                        Console.WriteLine("Lo studente è stato rimosso dall'elenco degli studenti presenti");
+                                                    }
+                                                    break;
+                                                case 4:
+                                                    int numStudentiPresenti = corsi[indiceCorso].Lezioni[indiceLezione].StudentiPresenti.Count;
+                                                    int numStudentiCorso = corsi[indiceCorso].Studenti.Count;
+                                                    Console.WriteLine("La media degli studenti presenti è {0}", (float)numStudentiPresenti/(float)numStudentiCorso);
+                                                    break;
+                                                case 0:
+                                                    Console.Write("\n");
+                                                    break;
+                                                default:
+                                                    Console.WriteLine("ERRORE: L'input non corrisponde a nessuna scelta");
+                                                    break;
+                                            }
                                         }
                                     }
-                                    
                                 }
-                                
                                 break;
                             case 4:
                                 Console.WriteLine("Inserisci il nome dello studente");
@@ -216,6 +253,7 @@ while (scelta != 0)
                                 }
 
                                 corsi[indiceCorso].AggiungiStudente(nomeStudente, cognomeStudente, matricolaStudente);
+                                
                                 Console.WriteLine("Lo studente è stato aggiunto");
                                 break;
                             case 5:
@@ -229,6 +267,9 @@ while (scelta != 0)
                                     Console.WriteLine(studente);
                                 }
                                 break;
+                            case 6:
+                                Console.WriteLine("La media degli studenti presenti ad un corso è {0:0.00}", corsi[indiceCorso].MediaStudentiPresenti());
+                                break;
                             case 0:
                                 Console.Write("\n");
                                 break;
@@ -239,9 +280,7 @@ while (scelta != 0)
                     }
                 }
             }
-
             break;
-        
         case 3:
             if (corsi.Count == 0)
             {
@@ -253,6 +292,7 @@ while (scelta != 0)
             {
                 Console.WriteLine($"{i + 1}|{corsi[i]}");
             }
+            Console.Write("\n");
             break;
         case 0:
             Console.WriteLine("Arrivederci");

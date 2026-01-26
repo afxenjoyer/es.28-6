@@ -1,4 +1,6 @@
-﻿namespace CorsoLibrary;
+﻿using System.Text;
+
+namespace CorsoLibrary;
 
 public class Lezione
 {
@@ -8,10 +10,10 @@ public class Lezione
     public TimeSpan Durata { get; set; }
     public Docente DocenteAssegnato { get; set; }
     public Aula AulaAssegnata { get; set; }
-    public List<Studente> StudentiPresenti { get; set; }
+    public List<Studente> StudentiPresenti { get; set; } = new List<Studente>();
 
     public Lezione(string desc, DateTime data, DateTime oraInizio, 
-        TimeSpan durata, Docente docenteAssegnato, Aula aulaAssegnata, List<Studente> studentiPresenti)
+        TimeSpan durata, Docente docenteAssegnato, Aula aulaAssegnata)
     {
         Descrizione = desc;
         Data = data;
@@ -19,7 +21,6 @@ public class Lezione
         Durata = durata;
         DocenteAssegnato = docenteAssegnato;
         AulaAssegnata = aulaAssegnata;
-        StudentiPresenti = studentiPresenti;
     }
 
     public override string ToString()
@@ -27,16 +28,33 @@ public class Lezione
         return $"{Descrizione} {Data:d} {OraInizio:t} {Durata:g} {DocenteAssegnato} {AulaAssegnata}";
     }
 
-    public void SegnaStudenteAssente(int matricola)
+    public bool SegnaStudenteAssente(int matricola)
     {
         foreach (var studente in StudentiPresenti)
         {
             if (matricola == studente.Matricola)
             {
                 StudentiPresenti.Remove(studente);
-                return;
+                return true;
             }
         }
-        throw new Exception("La matricola inserita non corrisponde a nessuno studente nella lista");
+
+        return false;
+        // throw new Exception("La matricola inserita non corrisponde a nessuno studente nella lista");
+    }
+
+    public string ElencaStudentiPresenti()
+    {
+        if (StudentiPresenti.Count == 0)
+        {
+            return String.Empty;
+        }
+
+        StringBuilder elencoPresenti = new StringBuilder();
+        for (int i = 0; i < StudentiPresenti.Count; i++)
+        {
+            elencoPresenti.Append($"{i + 1}|{StudentiPresenti[i].ToString()}\n");
+        }
+        return elencoPresenti.ToString();
     }
 }
