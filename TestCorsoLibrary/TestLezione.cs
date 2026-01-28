@@ -8,37 +8,37 @@ namespace TestCorsoLibrary
         [TestMethod]
         public void TestSegnaStudenteAssente()
         {
+            var corso = new Corso("Corso", 2);
             var docente = new Docente("Tizio", "Caio", "Laurea");
             var lezione = new Lezione
                 ("Lezione", DateTime.Today, DateTime.Now, TimeSpan.FromHours(2),
                     docente, new Aula(30, "Neumann"));
 
-            var studente1 = new Studente("Pierino", "Piero", 123456);
-            var studente2 = new Studente("Pierino II", "Piero", 090909);
-            var studente3 = new Studente("Pierino III", "Piero", 679679);
+            var studente = new Studente("Pierino", "Piero", 123456);
+            corso.AggiungiStudente(studente.Nome, studente.Cognome, studente.Matricola);
+            corso.AggiungiStudente("Pierino II", "Piero", 090909);
 
-            lezione.StudentiPresenti.Add(studente1);
-            lezione.StudentiPresenti.Add(studente2);
-            lezione.StudentiPresenti.Add(studente3);
+            corso.AggiungiLezione(lezione);
 
             bool segnalazioneRiuscita = lezione.SegnaStudenteAssente(090909);
-            Assert.IsTrue(lezione.StudentiPresenti[0] == studente1 && lezione.StudentiPresenti[1] == studente3 
-                                                                   && segnalazioneRiuscita == true);
+            Assert.AreEqual(corso.Lezioni[0].StudentiPresenti[0].Matricola, studente.Matricola);
+            Assert.AreEqual(segnalazioneRiuscita, true);
         }
 
         [TestMethod]
         public void TestSegnaStudenteAssenteException()
         {
+            var corso = new Corso("Corso", 2);
             var docente = new Docente("Tizio", "Caio", "Laurea");
             var lezione = new Lezione
             ("Lezione", DateTime.Today, DateTime.Now, TimeSpan.FromHours(2),
                 docente, new Aula(30, "Neumann"));
 
-            var studente1 = new Studente("Pierino", "Piero", 123456);
-            lezione.StudentiPresenti.Add(studente1);
+            corso.AggiungiStudente("Pierino", "Piero", 123456);
+            corso.AggiungiLezione(lezione);
 
             bool segnalazioneRiuscita = lezione.SegnaStudenteAssente(090909);
-            Assert.IsFalse(segnalazioneRiuscita);
+            Assert.AreEqual(segnalazioneRiuscita, false);
         }
     }
 }
