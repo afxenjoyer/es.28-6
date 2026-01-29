@@ -25,7 +25,20 @@ namespace WinFormUI
 
         private void btnSelezionaCorso_Click(object sender, EventArgs e)
         {
+            if (corsi.Count == 0)
+            {
+                MessageBox.Show("Non ci sono corsi da selezionare", "Informazione", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
 
+            var selezionaCorso = new frmSelezionaCorso(corsi);
+            selezionaCorso.ShowDialog();
+
+            if (selezionaCorso.DialogResult == DialogResult.OK)
+            {
+                var corsoSelezionato = selezionaCorso.corsoSelezionato;
+                // Dopo dovrebbe lanciare un nuovo Form per gestire il corso selezionato (Aggiungere lezioni/studenti, ecc.)
+            }
         }
 
         private void btnElencaCorsi_Click(object sender, EventArgs e)
