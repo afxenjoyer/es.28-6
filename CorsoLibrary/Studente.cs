@@ -6,6 +6,7 @@ public class Studente
     public string Cognome { get; set; }
     public int Matricola { get; set; }
 
+    public Studente() {}
     public Studente(string nome, string cognome, int matricola)
     {
         Nome = nome;

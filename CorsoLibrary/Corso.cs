@@ -9,6 +9,7 @@ public class Corso
     public List<Lezione> Lezioni { get; set; } = new List<Lezione>();
     public List<Studente> Studenti { get; set; } = new List<Studente>();
 
+    public Corso(){}
     public Corso(string nome, int numEdizione)
     {
         Nome = nome;
@@ -22,10 +23,7 @@ public class Corso
 
     public void AggiungiLezione(Lezione lezione)
     {
-        foreach (var studente in Studenti)
-        {
-            lezione.StudentiPresenti.Add(new Studente(studente.Nome, studente.Cognome, studente.Matricola));
-        }
+        lezione.StudentiPresenti.AddRange(Studenti);
         Lezioni.Add(lezione);
     }
 

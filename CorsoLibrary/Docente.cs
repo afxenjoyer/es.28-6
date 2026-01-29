@@ -6,6 +6,7 @@ public class Docente
     public string Cognome { get; set; }
     public string TitoloStudio { get; set; }
 
+    public Docente() {}
     public Docente(string nome, string cognome, string titoloStudio)
     {
         Nome = nome;

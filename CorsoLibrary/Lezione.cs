@@ -12,6 +12,7 @@ public class Lezione
     public Aula AulaAssegnata { get; set; }
     public List<Studente> StudentiPresenti { get; set; } = new List<Studente>();
 
+    public Lezione() {}
     public Lezione(string desc, DateTime data, DateTime oraInizio, 
         TimeSpan durata, Docente docenteAssegnato, Aula aulaAssegnata)
     {
