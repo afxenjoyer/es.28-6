@@ -26,13 +26,16 @@ namespace WinFormUI
             lstSelezioneCorso.DataSource = corsiDaElencare;
         }
 
-        private void lstSelezioneCorso_SelectedValueChanged(object sender, EventArgs e)
+        private void btnSelezionaCorso_Click(object sender, EventArgs e)
         {
-            if (lstSelezioneCorso.SelectedIndex != -1)
+            if (lstSelezioneCorso.SelectedIndex == -1)
             {
-                corsoSelezionato = (Corso)lstSelezioneCorso.SelectedItem;
-                DialogResult = DialogResult.OK;
+                MessageBox.Show("Non hai selezionato nessun corso",
+                    "Errore", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
+            corsoSelezionato = (Corso)lstSelezioneCorso.SelectedItem;
+            DialogResult = DialogResult.OK;
         }
     }
 }

@@ -4,7 +4,7 @@ public class Aula
 {
     public int Capienza { get; set; }
     public string Nome { get; set; }
-    public List<string> Risorse { get; set; } = new List<string>();
+    public string Risorse { get; set; }
 
     public Aula() {}
     public Aula(int capienza, string nome)

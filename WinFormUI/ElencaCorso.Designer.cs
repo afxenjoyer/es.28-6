@@ -1,4 +1,5 @@
-﻿namespace WinFormUI
+﻿
+namespace WinFormUI
 {
     partial class frmElencoCorsi
     {

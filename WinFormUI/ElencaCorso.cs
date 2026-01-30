@@ -13,7 +13,7 @@ namespace WinFormUI
 {
     public partial class frmElencoCorsi : Form
     {
-        private List<Corso> corsiDaElencare; 
+        private List<Corso> corsiDaElencare;
         public frmElencoCorsi(List<Corso> corsi)
         {
             InitializeComponent();

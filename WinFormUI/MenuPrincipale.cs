@@ -3,10 +3,10 @@ using CorsoLibrary;
 
 namespace WinFormUI
 {
-    public partial class frmMain : Form
+    public partial class MenuPrincipale : Form
     {
-        private List<Corso> corsi = new List<Corso>(); 
-        public frmMain()
+        private List<Corso> corsi = new List<Corso>();
+        public MenuPrincipale()
         {
             InitializeComponent();
         }
@@ -38,6 +38,8 @@ namespace WinFormUI
             {
                 var corsoSelezionato = selezionaCorso.corsoSelezionato;
                 // Dopo dovrebbe lanciare un nuovo Form per gestire il corso selezionato (Aggiungere lezioni/studenti, ecc.)
+                var gestoreCorso = new frmGestoreCorso(corsoSelezionato);
+                gestoreCorso.ShowDialog();
             }
         }
 
@@ -54,20 +56,30 @@ namespace WinFormUI
 
         private void btnSalva_Click(object sender, EventArgs e)
         {
-            var serializer = new XmlSerializer(typeof(List<Corso>));
-            var writer = new StreamWriter(".\\corsi.xml");
+            sfdSerializzazione.ShowDialog();
+        }
 
-            serializer.Serialize(writer, corsi);
-            writer.Close();
+        private void sfdSerializzazione_FileOk(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            var serializer = new XmlSerializer(typeof(List<Corso>));
+            serializer.Serialize(sfdSerializzazione.OpenFile(), corsi);
+
+            MessageBox.Show("I corsi sono stati salvati",
+                "Informazione", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void btnCarica_Click(object sender, EventArgs e)
         {
+            ofdDeserializzazione.ShowDialog();
+        }
+
+        private void ofdDeserializzazione_FileOk(object sender, System.ComponentModel.CancelEventArgs e)
+        {
             var serializer = new XmlSerializer(typeof(List<Corso>));
-            
-            var reader = new StreamReader(".\\corsi.xml");
-            corsi = (List<Corso>)serializer.Deserialize(reader);
-            reader.Close();
+            corsi = (List<Corso>)serializer.Deserialize(ofdDeserializzazione.OpenFile());
+
+            MessageBox.Show("I corsi sono stati caricati",
+                "Informazione", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }
