@@ -13,11 +13,11 @@ namespace WinFormUI
 {
     public partial class frmAggiungiLezione : Form
     {
-        private List<Lezione> lezioni;
+        private List<Lezione> Lezioni;
         public frmAggiungiLezione(List<Lezione> listaLezioni)
         {
             InitializeComponent();
-            lezioni = listaLezioni;
+            Lezioni = listaLezioni;
         }
 
         private void btnAggiungiLezione_Click(object sender, EventArgs e)
@@ -29,7 +29,7 @@ namespace WinFormUI
             var lezioneDaAggiungere = new Lezione(txtDescrizioneCorso.Text,
                 dtpDataLezione.Value, dtpOrarioLezione.Value, TimeSpan.Zero, docente, aula);
 
-            lezioni.Add(lezioneDaAggiungere);
+            Lezioni.Add(lezioneDaAggiungere);
             this.Close();
         }
     }

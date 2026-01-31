@@ -46,6 +46,10 @@ public class Corso
         {
             throw new Exception("Lo studente è gia nella lista degli studenti");
         }
+        if (matricola < 0)
+        {
+            throw new Exception("La matricola non può essere un numero negativo");
+        }
         var studenteDaAggiungere = new Studente(nome, cognome, matricola);
 
         foreach (var lezione in Lezioni)

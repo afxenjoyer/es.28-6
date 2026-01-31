@@ -62,7 +62,10 @@ namespace WinFormUI
         private void sfdSerializzazione_FileOk(object sender, System.ComponentModel.CancelEventArgs e)
         {
             var serializer = new XmlSerializer(typeof(List<Corso>));
-            serializer.Serialize(sfdSerializzazione.OpenFile(), corsi);
+            var fileDaSerializzare = sfdSerializzazione.OpenFile();
+            serializer.Serialize(fileDaSerializzare, corsi);
+
+            fileDaSerializzare.Close();
 
             MessageBox.Show("I corsi sono stati salvati",
                 "Informazione", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -76,7 +79,10 @@ namespace WinFormUI
         private void ofdDeserializzazione_FileOk(object sender, System.ComponentModel.CancelEventArgs e)
         {
             var serializer = new XmlSerializer(typeof(List<Corso>));
-            corsi = (List<Corso>)serializer.Deserialize(ofdDeserializzazione.OpenFile());
+            var fileDaDeserializzare = ofdDeserializzazione.OpenFile();
+            corsi = (List<Corso>)serializer.Deserialize(fileDaDeserializzare);
+
+            fileDaDeserializzare.Close();
 
             MessageBox.Show("I corsi sono stati caricati",
                 "Informazione", MessageBoxButtons.OK, MessageBoxIcon.Information);

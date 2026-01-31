@@ -160,6 +160,7 @@
             // nudCapienzaAula
             // 
             nudCapienzaAula.Location = new Point(455, 27);
+            nudCapienzaAula.Maximum = new decimal(new int[] { 10000, 0, 0, 0 });
             nudCapienzaAula.Name = "nudCapienzaAula";
             nudCapienzaAula.Size = new Size(120, 23);
             nudCapienzaAula.TabIndex = 13;

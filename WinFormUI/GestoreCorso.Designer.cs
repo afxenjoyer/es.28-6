@@ -41,19 +41,21 @@
             // lstLezioni
             // 
             lstLezioni.FormattingEnabled = true;
+            lstLezioni.HorizontalScrollbar = true;
             lstLezioni.ItemHeight = 15;
             lstLezioni.Location = new Point(12, 32);
             lstLezioni.Name = "lstLezioni";
-            lstLezioni.Size = new Size(120, 184);
+            lstLezioni.Size = new Size(146, 184);
             lstLezioni.TabIndex = 0;
             // 
             // lstStudenti
             // 
             lstStudenti.FormattingEnabled = true;
+            lstStudenti.HorizontalScrollbar = true;
             lstStudenti.ItemHeight = 15;
-            lstStudenti.Location = new Point(187, 32);
+            lstStudenti.Location = new Point(190, 32);
             lstStudenti.Name = "lstStudenti";
-            lstStudenti.Size = new Size(120, 184);
+            lstStudenti.Size = new Size(146, 184);
             lstStudenti.TabIndex = 2;
             // 
             // lblLezioni
@@ -68,7 +70,7 @@
             // lblStudenti
             // 
             lblStudenti.AutoSize = true;
-            lblStudenti.Location = new Point(187, 14);
+            lblStudenti.Location = new Point(190, 14);
             lblStudenti.Name = "lblStudenti";
             lblStudenti.Size = new Size(88, 15);
             lblStudenti.TabIndex = 4;
@@ -78,7 +80,7 @@
             // 
             btnAggiungiLezione.Location = new Point(12, 224);
             btnAggiungiLezione.Name = "btnAggiungiLezione";
-            btnAggiungiLezione.Size = new Size(120, 23);
+            btnAggiungiLezione.Size = new Size(146, 23);
             btnAggiungiLezione.TabIndex = 5;
             btnAggiungiLezione.Text = "Aggiungi Lezione";
             btnAggiungiLezione.UseVisualStyleBackColor = true;
@@ -88,28 +90,31 @@
             // 
             btnRimuoviLezione.Location = new Point(12, 253);
             btnRimuoviLezione.Name = "btnRimuoviLezione";
-            btnRimuoviLezione.Size = new Size(120, 23);
+            btnRimuoviLezione.Size = new Size(146, 23);
             btnRimuoviLezione.TabIndex = 6;
             btnRimuoviLezione.Text = "Rimuovi Lezione";
             btnRimuoviLezione.UseVisualStyleBackColor = true;
+            btnRimuoviLezione.Click += btnRimuoviLezione_Click;
             // 
             // btnDatiLezione
             // 
             btnDatiLezione.Location = new Point(12, 282);
             btnDatiLezione.Name = "btnDatiLezione";
-            btnDatiLezione.Size = new Size(120, 23);
+            btnDatiLezione.Size = new Size(146, 23);
             btnDatiLezione.TabIndex = 7;
             btnDatiLezione.Text = "Dati Lezione";
             btnDatiLezione.UseVisualStyleBackColor = true;
+            btnDatiLezione.Click += btnDatiLezione_Click;
             // 
             // btnAggiungiStudente
             // 
-            btnAggiungiStudente.Location = new Point(187, 224);
+            btnAggiungiStudente.Location = new Point(190, 224);
             btnAggiungiStudente.Name = "btnAggiungiStudente";
-            btnAggiungiStudente.Size = new Size(120, 23);
+            btnAggiungiStudente.Size = new Size(146, 23);
             btnAggiungiStudente.TabIndex = 8;
             btnAggiungiStudente.Text = "Aggiungi Studente";
             btnAggiungiStudente.UseVisualStyleBackColor = true;
+            btnAggiungiStudente.Click += btnAggiungiStudente_Click;
             // 
             // frmGestoreCorso
             // 
