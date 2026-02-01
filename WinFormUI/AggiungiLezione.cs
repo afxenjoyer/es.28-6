@@ -27,7 +27,7 @@ namespace WinFormUI
                 txtCognomeDocente.Text, txtTitoloStudio.Text);
 
             var lezioneDaAggiungere = new Lezione(txtDescrizioneCorso.Text,
-                dtpDataLezione.Value, dtpOrarioLezione.Value, TimeSpan.Zero, docente, aula);
+                dtpDataLezione.Value, dtpOrarioLezione.Value, dtpDurataLezione.Value.TimeOfDay, docente, aula);
 
             Lezioni.Add(lezioneDaAggiungere);
             this.Close();

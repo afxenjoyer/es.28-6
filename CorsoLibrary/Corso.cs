@@ -44,7 +44,7 @@ public class Corso
     {
         if (MatricolaPresente(matricola))
         {
-            throw new Exception("Lo studente è gia nella lista degli studenti");
+           throw new Exception("Lo studente è gia nella lista degli studenti");
         }
         if (matricola < 0)
         {

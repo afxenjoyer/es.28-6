@@ -48,6 +48,7 @@
             txtRisorseAula = new TextBox();
             lblRisorseAula = new Label();
             btnAggiungiLezione = new Button();
+            dtpDurataLezione = new DateTimePicker();
             ((System.ComponentModel.ISupportInitialize)nudCapienzaAula).BeginInit();
             SuspendLayout();
             // 
@@ -216,11 +217,20 @@
             btnAggiungiLezione.UseVisualStyleBackColor = true;
             btnAggiungiLezione.Click += btnAggiungiLezione_Click;
             // 
+            // dtpDurataLezione
+            // 
+            dtpDurataLezione.Format = DateTimePickerFormat.Time;
+            dtpDurataLezione.Location = new Point(12, 160);
+            dtpDurataLezione.Name = "dtpDurataLezione";
+            dtpDurataLezione.Size = new Size(200, 23);
+            dtpDurataLezione.TabIndex = 20;
+            // 
             // frmAggiungiLezione
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(667, 209);
+            Controls.Add(dtpDurataLezione);
             Controls.Add(btnAggiungiLezione);
             Controls.Add(lblRisorseAula);
             Controls.Add(txtRisorseAula);
@@ -270,5 +280,6 @@
         private TextBox txtRisorseAula;
         private Label lblRisorseAula;
         private Button btnAggiungiLezione;
+        private DateTimePicker dtpDurataLezione;
     }
 }

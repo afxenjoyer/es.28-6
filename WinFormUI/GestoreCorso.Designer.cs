@@ -36,6 +36,7 @@
             btnRimuoviLezione = new Button();
             btnDatiLezione = new Button();
             btnAggiungiStudente = new Button();
+            btnMediaPresentiCorso = new Button();
             SuspendLayout();
             // 
             // lstLezioni
@@ -43,7 +44,7 @@
             lstLezioni.FormattingEnabled = true;
             lstLezioni.HorizontalScrollbar = true;
             lstLezioni.ItemHeight = 15;
-            lstLezioni.Location = new Point(12, 32);
+            lstLezioni.Location = new Point(12, 24);
             lstLezioni.Name = "lstLezioni";
             lstLezioni.Size = new Size(146, 184);
             lstLezioni.TabIndex = 0;
@@ -53,7 +54,7 @@
             lstStudenti.FormattingEnabled = true;
             lstStudenti.HorizontalScrollbar = true;
             lstStudenti.ItemHeight = 15;
-            lstStudenti.Location = new Point(190, 32);
+            lstStudenti.Location = new Point(190, 24);
             lstStudenti.Name = "lstStudenti";
             lstStudenti.Size = new Size(146, 184);
             lstStudenti.TabIndex = 2;
@@ -61,7 +62,7 @@
             // lblLezioni
             // 
             lblLezioni.AutoSize = true;
-            lblLezioni.Location = new Point(12, 14);
+            lblLezioni.Location = new Point(12, 6);
             lblLezioni.Name = "lblLezioni";
             lblLezioni.Size = new Size(47, 15);
             lblLezioni.TabIndex = 3;
@@ -70,7 +71,7 @@
             // lblStudenti
             // 
             lblStudenti.AutoSize = true;
-            lblStudenti.Location = new Point(190, 14);
+            lblStudenti.Location = new Point(190, 6);
             lblStudenti.Name = "lblStudenti";
             lblStudenti.Size = new Size(88, 15);
             lblStudenti.TabIndex = 4;
@@ -78,7 +79,7 @@
             // 
             // btnAggiungiLezione
             // 
-            btnAggiungiLezione.Location = new Point(12, 224);
+            btnAggiungiLezione.Location = new Point(12, 216);
             btnAggiungiLezione.Name = "btnAggiungiLezione";
             btnAggiungiLezione.Size = new Size(146, 23);
             btnAggiungiLezione.TabIndex = 5;
@@ -88,7 +89,7 @@
             // 
             // btnRimuoviLezione
             // 
-            btnRimuoviLezione.Location = new Point(12, 253);
+            btnRimuoviLezione.Location = new Point(12, 245);
             btnRimuoviLezione.Name = "btnRimuoviLezione";
             btnRimuoviLezione.Size = new Size(146, 23);
             btnRimuoviLezione.TabIndex = 6;
@@ -98,7 +99,7 @@
             // 
             // btnDatiLezione
             // 
-            btnDatiLezione.Location = new Point(12, 282);
+            btnDatiLezione.Location = new Point(12, 274);
             btnDatiLezione.Name = "btnDatiLezione";
             btnDatiLezione.Size = new Size(146, 23);
             btnDatiLezione.TabIndex = 7;
@@ -108,7 +109,7 @@
             // 
             // btnAggiungiStudente
             // 
-            btnAggiungiStudente.Location = new Point(190, 224);
+            btnAggiungiStudente.Location = new Point(190, 216);
             btnAggiungiStudente.Name = "btnAggiungiStudente";
             btnAggiungiStudente.Size = new Size(146, 23);
             btnAggiungiStudente.TabIndex = 8;
@@ -116,11 +117,22 @@
             btnAggiungiStudente.UseVisualStyleBackColor = true;
             btnAggiungiStudente.Click += btnAggiungiStudente_Click;
             // 
+            // btnMediaPresentiCorso
+            // 
+            btnMediaPresentiCorso.Location = new Point(190, 257);
+            btnMediaPresentiCorso.Name = "btnMediaPresentiCorso";
+            btnMediaPresentiCorso.Size = new Size(144, 40);
+            btnMediaPresentiCorso.TabIndex = 9;
+            btnMediaPresentiCorso.Text = "Media Presenti Corso";
+            btnMediaPresentiCorso.UseVisualStyleBackColor = true;
+            btnMediaPresentiCorso.Click += btnMediaPresentiCorso_Click;
+            // 
             // frmGestoreCorso
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(365, 323);
+            ClientSize = new Size(346, 304);
+            Controls.Add(btnMediaPresentiCorso);
             Controls.Add(btnAggiungiStudente);
             Controls.Add(btnDatiLezione);
             Controls.Add(btnRimuoviLezione);
@@ -145,5 +157,6 @@
         private Button btnRimuoviLezione;
         private Button btnDatiLezione;
         private Button btnAggiungiStudente;
+        private Button btnMediaPresentiCorso;
     }
 }

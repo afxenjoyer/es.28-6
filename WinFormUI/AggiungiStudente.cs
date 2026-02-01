@@ -34,7 +34,6 @@ namespace WinFormUI
             catch (Exception exception)
             {
                 MessageBox.Show($"{exception.Message}", "Errore", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                throw;
             }
         }
     }
